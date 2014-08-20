@@ -33,7 +33,7 @@ void adc_init(void) {
 	NRF_ADC->ENABLE = ADC_ENABLE_ENABLE_Enabled;
 
 	// Configure PPI channel 0 to start ADC task
-	NRF_PPI->CH[0].EEP = (uint32_t) &NRF_RTC0->EVENTS_TICK;
+	NRF_PPI->CH[0].EEP = (uint32_t) &NRF_RTC0->EVENTS_COMPARE[0];
 	NRF_PPI->CH[0].TEP = (uint32_t) &NRF_ADC->TASKS_START;
 
 	// Enable PPI channel 0
@@ -48,7 +48,8 @@ void ADC_IRQHandler(void) {
 	if (NRF_ADC->EVENTS_END != 0) {
 		NRF_ADC->EVENTS_END = 0;
 
-		batt_lvl_in_milli_volts = ADC_RESULT_IN_MILLI_VOLTS(NRF_ADC->RESULT); //+ DIODE_FWD_VOLT_DROP_MILLIVOLTS;
+		//+ DIODE_FWD_VOLT_DROP_MILLIVOLTS;
+		batt_lvl_in_milli_volts = ADC_RESULT_IN_MILLI_VOLTS(NRF_ADC->RESULT);
 
 		dump_uint16(&batt_lvl_in_milli_volts);
 		blink_red();
