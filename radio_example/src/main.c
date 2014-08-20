@@ -9,6 +9,13 @@ static uint8_t packet[4];
 
 int main(void) {
 
+    /* Start 16 MHz crystal oscillator */
+    NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
+    NRF_CLOCK->TASKS_HFCLKSTART    = 1;
+
+    /* Wait for the external oscillator to start up */
+    while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
+
 	radio_init();
 
     // Set payload pointer
