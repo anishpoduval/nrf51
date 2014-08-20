@@ -55,5 +55,6 @@ void ADC_IRQHandler(void) {
 		blink_red();
 
 		NRF_ADC->TASKS_STOP = 1;
+		NRF_RTC0->CC[0] += (5UL * 32768UL);
 	}
 }

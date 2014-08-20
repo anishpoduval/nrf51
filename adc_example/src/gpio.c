@@ -13,7 +13,7 @@
 void gpio_init(void) {
 
 	nrf_gpio_cfg_output(LED_RGB_RED);
-	nrf_gpio_pin_clear(LED_RGB_RED);
+	//nrf_gpio_pin_clear(LED_RGB_RED);
 
 }
 
