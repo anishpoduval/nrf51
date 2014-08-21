@@ -1,0 +1,11 @@
+20:31:49 **** Incremental Build of configuration Debug for project radio_test_example ****
+make all 
+Invoking: Cross ARM GNU Print Size
+arm-none-eabi-size --format=berkeley "radio_test_example.elf"
+   text	   data	    bss	    dec	    hex	filename
+   6832	   1100	    316	   8248	   2038	radio_test_example.elf
+Finished building: radio_test_example.siz
+ 
+
+20:31:49 Build Finished (took 68ms)
+

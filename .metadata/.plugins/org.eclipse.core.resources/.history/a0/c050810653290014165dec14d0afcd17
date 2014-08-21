@@ -1,0 +1,44 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+../src/main.c \
+../src/radio.c \
+../src/system_nrf51.c 
+
+S_UPPER_SRCS += \
+../src/gcc_startup_nrf51.S 
+
+OBJS += \
+./src/gcc_startup_nrf51.o \
+./src/main.o \
+./src/radio.o \
+./src/system_nrf51.o 
+
+C_DEPS += \
+./src/main.d \
+./src/radio.d \
+./src/system_nrf51.d 
+
+S_UPPER_DEPS += \
+./src/gcc_startup_nrf51.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+src/%.o: ../src/%.S
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross ARM GNU Assembler'
+	arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -x assembler-with-cpp -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+src/%.o: ../src/%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross ARM C Compiler'
+	arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+

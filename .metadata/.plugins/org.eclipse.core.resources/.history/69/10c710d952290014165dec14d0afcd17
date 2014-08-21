@@ -1,0 +1,24 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Add inputs and outputs from these tool invocations to the build variables 
+C_SRCS += \
+/opt/nrf51_sdk/nrf51822/Source/simple_uart/simple_uart.c 
+
+OBJS += \
+./simple_uart/simple_uart.o 
+
+C_DEPS += \
+./simple_uart/simple_uart.d 
+
+
+# Each subdirectory must supply rules for building sources it contributes
+simple_uart/simple_uart.o: /opt/nrf51_sdk/nrf51822/Source/simple_uart/simple_uart.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross ARM C Compiler'
+	arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
