@@ -1,11 +1,45 @@
-20:31:49 **** Incremental Build of configuration Debug for project radio_test_example ****
+17:09:30 **** Build of configuration Debug for project radio_test_example ****
 make all 
+Building file: ../src/gcc_startup_nrf51.S
+Invoking: Cross ARM GNU Assembler
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -x assembler-with-cpp -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -MMD -MP -MF"src/gcc_startup_nrf51.d" -MT"src/gcc_startup_nrf51.o" -c -o "src/gcc_startup_nrf51.o" "../src/gcc_startup_nrf51.S"
+Finished building: ../src/gcc_startup_nrf51.S
+ 
+Building file: ../src/main.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building file: ../src/radio_test.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"src/radio_test.d" -MT"src/radio_test.o" -c -o "src/radio_test.o" "../src/radio_test.c"
+Finished building: ../src/radio_test.c
+ 
+Building file: ../src/system_nrf51.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"src/system_nrf51.d" -MT"src/system_nrf51.o" -c -o "src/system_nrf51.o" "../src/system_nrf51.c"
+Finished building: ../src/system_nrf51.c
+ 
+Building file: ../src/uart.c
+Invoking: Cross ARM C Compiler
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -std=gnu99 -MMD -MP -MF"src/uart.d" -MT"src/uart.o" -c -o "src/uart.o" "../src/uart.c"
+Finished building: ../src/uart.c
+ 
+Building target: radio_test_example.elf
+Invoking: Cross ARM C Linker
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -T mem.ld -T sections.ld -L"../ldscripts" -Wl,-Map,"radio_test_example.map" -o "radio_test_example.elf"  ./src/gcc_startup_nrf51.o ./src/main.o ./src/radio_test.o ./src/system_nrf51.o ./src/uart.o   
+Finished building target: radio_test_example.elf
+ 
+Invoking: Cross ARM GNU Create Flash Image
+arm-none-eabi-objcopy -O ihex "radio_test_example.elf"  "radio_test_example.hex"
+Finished building: radio_test_example.hex
+ 
 Invoking: Cross ARM GNU Print Size
 arm-none-eabi-size --format=berkeley "radio_test_example.elf"
    text	   data	    bss	    dec	    hex	filename
-   6832	   1100	    316	   8248	   2038	radio_test_example.elf
+   6864	   1100	    316	   8280	   2058	radio_test_example.elf
 Finished building: radio_test_example.siz
  
 
-20:31:49 Build Finished (took 68ms)
+17:09:31 Build Finished (took 515ms)
 

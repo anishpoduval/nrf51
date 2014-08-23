@@ -5,6 +5,7 @@
  *      Author: valdo
  */
 
+#include <stdbool.h>
 #include "radio.h"
 #include "nrf_delay.h"
 
@@ -18,7 +19,8 @@
 void radio_init(void) {
 
 	// Radio config
-	NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);
+	NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm
+			<< RADIO_TXPOWER_TXPOWER_Pos);
 	NRF_RADIO->FREQUENCY = 7UL;  // Frequency bin 7, 2407MHz
 	NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);
 
@@ -44,14 +46,75 @@ void radio_init(void) {
 
 	// CRC Config
 	NRF_RADIO->CRCCNF = (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos); // Number of checksum bits
-	if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk) == (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos)) {
+	if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk)
+			== (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos)) {
+
 		NRF_RADIO->CRCINIT = 0xFFFFUL;      // Initial value
 		NRF_RADIO->CRCPOLY = 0x11021UL;     // CRC poly: x^16+x^12^x^5+1
-	} else if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk) == (RADIO_CRCCNF_LEN_One << RADIO_CRCCNF_LEN_Pos)) {
+
+	} else if ((NRF_RADIO->CRCCNF & RADIO_CRCCNF_LEN_Msk)
+			== (RADIO_CRCCNF_LEN_One << RADIO_CRCCNF_LEN_Pos)) {
+
 		NRF_RADIO->CRCINIT = 0xFFUL;        // Initial value
 		NRF_RADIO->CRCPOLY = 0x107UL;       // CRC poly: x^8+x^2^x^1+1
 	}
 
+    // Enable the shortcut between getting an address match in the radio and starting the RSSI
+    // This will enable the RSSI once on every received packet
+    NRF_RADIO->SHORTS |= RADIO_SHORTS_ADDRESS_RSSISTART_Msk;
+
 	nrf_delay_ms(3);
+
 }
 
+void radio_send(void) {
+
+	NRF_RADIO->EVENTS_READY = 0U;
+	NRF_RADIO->TASKS_TXEN = 1;
+	while (NRF_RADIO->EVENTS_READY == 0U)
+		;
+
+	NRF_RADIO->TASKS_START = 1U;
+	NRF_RADIO->EVENTS_END = 0U;
+	while (NRF_RADIO->EVENTS_END == 0U)
+		;
+
+	NRF_RADIO->EVENTS_DISABLED = 0U;
+
+	// Disable radio
+	NRF_RADIO->TASKS_DISABLE = 1U;
+	while (NRF_RADIO->EVENTS_DISABLED == 0U)
+		;
+
+}
+
+bool radio_receive(void) {
+	bool result = false;
+
+	NRF_RADIO->EVENTS_READY = 0U;
+
+	// Enable radio and wait for ready
+	NRF_RADIO->TASKS_RXEN = 1U;
+	while (NRF_RADIO->EVENTS_READY == 0U)
+		;
+	NRF_RADIO->EVENTS_END = 0U;
+
+	// Start listening and wait for address received event
+	NRF_RADIO->TASKS_START = 1U;
+
+	// Wait for end of packet
+	while (NRF_RADIO->EVENTS_END == 0U)
+		;
+
+	// Write received data to LED0 and LED1 on CRC match
+	if (NRF_RADIO->CRCSTATUS == 1U) {
+		result = true;
+	}
+	NRF_RADIO->EVENTS_DISABLED = 0U;
+
+	// Disable radio
+	NRF_RADIO->TASKS_DISABLE = 1U;
+	while (NRF_RADIO->EVENTS_DISABLED == 0U);
+
+	return result;
+}

@@ -1,9 +1,11 @@
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include "nrf_delay.h"
 #include "nrf_gpio.h"
 #include "boards.h"
 #include "radio.h"
+#include "uart.h"
 
 static uint8_t packet[4];
 
@@ -19,36 +21,37 @@ int main(void) {
     nrf_gpio_cfg_output(LED_RGB_RED);
     nrf_gpio_cfg_output(LED_RGB_BLUE);
 
+    uart_init(TX_PIN_NUMBER, RX_PIN_NUMBER);
 	radio_init();
 
     // Set payload pointer
-    NRF_RADIO->PACKETPTR = (uint32_t)packet;
+    NRF_RADIO->PACKETPTR = (uint32_t) packet;
 
     packet[0] = 1;
 
 	while (true) {
 
-		nrf_gpio_pin_clear(LED_RGB_RED);
-		nrf_gpio_pin_set(LED_RGB_BLUE);
-		nrf_delay_us(1000000);
+		//nrf_gpio_pin_set(LED_RGB_BLUE);
 
-		NRF_RADIO->EVENTS_READY = 0U;
-		NRF_RADIO->TASKS_TXEN = 1;
-		while (NRF_RADIO->EVENTS_READY == 0U);
+		//radio_send();
 
-		NRF_RADIO->TASKS_START = 1U;
-		NRF_RADIO->EVENTS_END = 0U;
-		while (NRF_RADIO->EVENTS_END == 0U);
+		//uart_putstring((const uint8_t *) "Sent ");
+		//uart_put(packet[0]);
+		//uart_putstring("\n\r");
 
-		NRF_RADIO->EVENTS_DISABLED = 0U;
+		//nrf_gpio_pin_clear(LED_RGB_BLUE);
+		//nrf_delay_us(1000000);
 
-		// Disable radio
-		NRF_RADIO->TASKS_DISABLE = 1U;
-		while (NRF_RADIO->EVENTS_DISABLED == 0U);
+		//nrf_gpio_pin_set(LED_RGB_RED);
 
-		nrf_gpio_pin_clear(LED_RGB_BLUE);
-		nrf_gpio_pin_set(LED_RGB_RED);
-		nrf_delay_us(1000000);
+		if (radio_receive()) {
+			printf("Received: no = %d, rssi = %d\n\r", packet[0], NRF_RADIO->RSSISAMPLE);
+		} else {
+			printf("Bad CRC");
+		}
+
+		//nrf_gpio_pin_clear(LED_RGB_RED);
+		//nrf_delay_us(1000000);
 
 		packet[0] += 1;
 
