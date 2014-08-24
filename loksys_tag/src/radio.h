@@ -8,7 +8,6 @@
 #ifndef RADIO_H_
 #define RADIO_H_
 
-void radio_init(uint32_t *oid);
-void radio_send(void);
+void radio_init(void);
 
 #endif /* RADIO_H_ */

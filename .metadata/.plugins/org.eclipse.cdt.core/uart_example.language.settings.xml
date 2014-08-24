@@ -4,13 +4,13 @@
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
 			<provider id="ilg.gnuarmeclipse.managedbuild.cross.GCCBuiltinSpecsDetector">
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -29,6 +29,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__APCS_32__" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__ARMEL__" value="7">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ARMEL__" value="1">
@@ -59,6 +62,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ARM_SIZEOF_MINIMAL_ENUM" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__ARM_SIZEOF_WCHAR_T" value="6145">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ARM_SIZEOF_WCHAR_T" value="32">
@@ -154,9 +160,6 @@
 					<entry kind="macro" name="__DEC128_MANT_DIG__" value="34">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__DEC128_MAX_EXP__" value="6145">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
 					<entry kind="macro" name="__DEC128_MAX__" value="9.999999999999999999999999999999999E6144DL">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -167,9 +170,6 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC128_SUBNORMAL_MIN__" value="0.000000000000000000000000000000001E-6143DL">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__DEC32_EPSILON__" value="1E-6DF">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC32_MANT_DIG__" value="7">
@@ -197,9 +197,6 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC64_MAX_EXP__" value="385">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__DEC64_MAX__" value="9.999999999999999E384DD">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__DEC64_MIN_EXP__" value="(-382)">
@@ -307,6 +304,9 @@
 					<entry kind="macro" name="__GCC_ATOMIC_CHAR_LOCK_FREE" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__GCC_ATOMIC_INT_LOCK_FREE" value="1E-6DF">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__GCC_ATOMIC_INT_LOCK_FREE" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -334,7 +334,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -580,6 +580,9 @@
 					<entry kind="macro" name="__ORDER_PDP_ENDIAN__" value="3412">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
+					<entry kind="macro" name="__PRAGMA_REDEFINE_EXTNAME" value="9.999999999999999E384DD">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
 					<entry kind="macro" name="__PRAGMA_REDEFINE_EXTNAME" value="1">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -623,9 +626,6 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__SFRACT_EPSILON__" value="0x1P-7HR">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
-					<entry kind="macro" name="__SFRACT_FBIT__" value="7">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__SFRACT_IBIT__" value="0">
@@ -722,6 +722,9 @@
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__THUMBEL__" value="1">
+						<flag value="BUILTIN|READONLY"/>
+					</entry>
+					<entry kind="macro" name="__THUMB_INTERWORK__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__THUMB_INTERWORK__" value="1">
@@ -982,9 +985,6 @@
 					<entry kind="macro" name="__USFRACT_EPSILON__" value="0x1P-8UHR">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__USFRACT_FBIT__" value="8">
-						<flag value="BUILTIN|READONLY"/>
-					</entry>
 					<entry kind="macro" name="__USFRACT_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
@@ -1012,7 +1012,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20131129 (release) [ARM/embedded-4_8-branch revision 205641]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -1044,22 +1044,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3/arm-none-eabi/armv6-m">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4/arm-none-eabi/armv6-m">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3/backward">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -1389,7 +1389,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -2070,7 +2070,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20131129 (release) [ARM/embedded-4_8-branch revision 205641]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -2114,13 +2114,13 @@
 		<extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
 			<provider id="ilg.gnuarmeclipse.managedbuild.cross.GCCBuiltinSpecsDetector">
 				<language id="org.eclipse.cdt.core.gcc">
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -2444,7 +2444,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -3125,7 +3125,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20131129 (release) [ARM/embedded-4_8-branch revision 205641]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">
@@ -3157,22 +3157,22 @@
 					</entry>
 				</language>
 				<language id="org.eclipse.cdt.core.g++">
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3/arm-none-eabi/armv6-m">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4/arm-none-eabi/armv6-m">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include/c++/4.8.3/backward">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include/c++/4.8.4/backward">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/lib/gcc/arm-none-eabi/4.8.3/include-fixed">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/lib/gcc/arm-none-eabi/4.8.4/include-fixed">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="includePath" name="/opt/arm/arm-none-eabi/include">
+					<entry kind="includePath" name="/usr/local/gcc-arm-none-eabi-4_8-2014q2/arm-none-eabi/include">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__ACCUM_EPSILON__" value="0x1P-15K">
@@ -3502,7 +3502,7 @@
 					<entry kind="macro" name="__GNUC_MINOR__" value="8">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="3">
+					<entry kind="macro" name="__GNUC_PATCHLEVEL__" value="4">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__GNUC_STDC_INLINE__" value="1">
@@ -4186,7 +4186,7 @@
 					<entry kind="macro" name="__UTQ_IBIT__" value="0">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
-					<entry kind="macro" name="__VERSION__" value="&quot;4.8.3 20131129 (release) [ARM/embedded-4_8-branch revision 205641]&quot;">
+					<entry kind="macro" name="__VERSION__" value="&quot;4.8.4 20140526 (release) [ARM/embedded-4_8-branch revision 211358]&quot;">
 						<flag value="BUILTIN|READONLY"/>
 					</entry>
 					<entry kind="macro" name="__VFP_FP__" value="1">

@@ -18,7 +18,7 @@
 #define PACKET1_STATIC_LENGTH       (1UL)  //!< static length in bytes
 #define PACKET1_PAYLOAD_SIZE        (sizeof(ProtoEnvelope))  //!< payload size in bytes
 
-void radio_init(uint32_t *oid) {
+void radio_init(void) {
 
 	// Radio config
 	NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);
@@ -30,7 +30,7 @@ void radio_init(uint32_t *oid) {
 	NRF_RADIO->PREFIX1 = 0xC5C6C7C8UL;  // Prefix byte of addresses 7 to 4
 	NRF_RADIO->BASE0 = 0xE7E7E7E7UL;  // Base address for prefix 0
 	NRF_RADIO->BASE1 = 0x00C2C2C2UL;  // Base address for prefix 1-7
-	NRF_RADIO->TXADDRESS = *oid; // Set device address 0 to use when transmitting
+	NRF_RADIO->TXADDRESS = 0x00UL; // Set device address 0 to use when transmitting
 	NRF_RADIO->RXADDRESSES = 0x01UL; // Enable device address 0 to use which receiving
 
 	// Packet configuration
@@ -66,49 +66,3 @@ void radio_init(uint32_t *oid) {
 
 }
 
-void radio_send(void) {
-
-	NRF_RADIO->EVENTS_READY = 0U;
-	NRF_RADIO->TASKS_TXEN = 1;
-	while (NRF_RADIO->EVENTS_READY == 0U);
-
-	NRF_RADIO->TASKS_START = 1U;
-	NRF_RADIO->EVENTS_END = 0U;
-	while (NRF_RADIO->EVENTS_END == 0U);
-
-	NRF_RADIO->EVENTS_DISABLED = 0U;
-
-	// Disable radio
-	NRF_RADIO->TASKS_DISABLE = 1U;
-	while (NRF_RADIO->EVENTS_DISABLED == 0U);
-
-}
-
-bool radio_receive(void) {
-	bool result = false;
-
-	NRF_RADIO->EVENTS_READY = 0U;
-
-	// Enable radio and wait for ready
-	NRF_RADIO->TASKS_RXEN = 1U;
-	while (NRF_RADIO->EVENTS_READY == 0U);
-	NRF_RADIO->EVENTS_END = 0U;
-
-	// Start listening and wait for address received event
-	NRF_RADIO->TASKS_START = 1U;
-
-	// Wait for end of packet
-	while (NRF_RADIO->EVENTS_END == 0U);
-
-	// Write received data to LED0 and LED1 on CRC match
-	if (NRF_RADIO->CRCSTATUS == 1U) {
-		result = true;
-	}
-	NRF_RADIO->EVENTS_DISABLED = 0U;
-
-	// Disable radio
-	NRF_RADIO->TASKS_DISABLE = 1U;
-	while (NRF_RADIO->EVENTS_DISABLED == 0U);
-
-	return result;
-}

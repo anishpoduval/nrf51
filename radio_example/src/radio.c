@@ -83,8 +83,7 @@ void radio_send(void) {
 
 	// Disable radio
 	NRF_RADIO->TASKS_DISABLE = 1U;
-	while (NRF_RADIO->EVENTS_DISABLED == 0U)
-		;
+	while (NRF_RADIO->EVENTS_DISABLED == 0U);
 
 }
 
@@ -95,16 +94,15 @@ bool radio_receive(void) {
 
 	// Enable radio and wait for ready
 	NRF_RADIO->TASKS_RXEN = 1U;
-	while (NRF_RADIO->EVENTS_READY == 0U)
-		;
+	while (NRF_RADIO->EVENTS_READY == 0U);
+
 	NRF_RADIO->EVENTS_END = 0U;
 
 	// Start listening and wait for address received event
 	NRF_RADIO->TASKS_START = 1U;
 
 	// Wait for end of packet
-	while (NRF_RADIO->EVENTS_END == 0U)
-		;
+	while (NRF_RADIO->EVENTS_END == 0U);
 
 	// Write received data to LED0 and LED1 on CRC match
 	if (NRF_RADIO->CRCSTATUS == 1U) {
