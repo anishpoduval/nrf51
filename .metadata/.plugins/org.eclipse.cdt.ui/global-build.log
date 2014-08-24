@@ -1,111 +1,30 @@
-21:40:01 **** Incremental Build of configuration Debug for project loksys_tag ****
+22:47:21 **** Build of configuration Debug for project loksys_receiver ****
 make all 
 Building file: ../src/main.c
 Invoking: Cross ARM C Compiler
 arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -I/home/valdo/Documents/nrf51/loksys_core -std=gnu99 -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
 Finished building: ../src/main.c
  
-Building target: loksys_tag.elf
+Building target: loksys_receiver.elf
 Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -T mem.ld -T sections.ld -L"../ldscripts" -Wl,-Map,"loksys_tag.map" -o "loksys_tag.elf"  ./src/gcc_startup_nrf51.o ./src/main.o ./src/radio.o ./src/system_nrf51.o  ./nrf_delay/nrf_delay.o  ./core/adc.o ./core/crc16.o ./core/crc32.o ./core/crc8.o ./core/timer.o ./core/uart.o ./core/xxtea.o   
-Finished building target: loksys_tag.elf
+arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -T mem.ld -T sections.ld -L"../ldscripts" -Wl,-Map,"loksys_receiver.map" -o "loksys_receiver.elf"  ./src/gcc_startup_nrf51.o ./src/main.o ./src/radio.o ./src/system_nrf51.o  ./nrf_delay/nrf_delay.o  ./core/adc.o ./core/crc16.o ./core/crc32.o ./core/crc8.o ./core/timer.o ./core/uart.o ./core/xxtea.o   
+Finished building target: loksys_receiver.elf
  
 Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O ihex "loksys_tag.elf"  "loksys_tag.hex"
-Finished building: loksys_tag.hex
+arm-none-eabi-objcopy -O ihex "loksys_receiver.elf"  "loksys_receiver.hex"
+Finished building: loksys_receiver.hex
  
 Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
+arm-none-eabi-size --format=berkeley "loksys_receiver.elf"
    text	   data	    bss	    dec	    hex	filename
-  39036	   3284	    188	  42508	   a60c	loksys_tag.elf
-Finished building: loksys_tag.siz
+  39020	   3284	    252	  42556	   a63c	loksys_receiver.elf
+Finished building: loksys_receiver.siz
  
-21:42:04 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Building file: ../src/main.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -I/home/valdo/Documents/nrf51/loksys_core -std=gnu99 -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
-Finished building: ../src/main.c
- 
-Building file: /home/valdo/Documents/nrf51/loksys_core/timer.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -I/home/valdo/Documents/nrf51/loksys_core -std=gnu99 -MMD -MP -MF"core/timer.d" -MT"core/timer.o" -c -o "core/timer.o" "/home/valdo/Documents/nrf51/loksys_core/timer.c"
-Finished building: /home/valdo/Documents/nrf51/loksys_core/timer.c
- 
-Building target: loksys_tag.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -T mem.ld -T sections.ld -L"../ldscripts" -Wl,-Map,"loksys_tag.map" -o "loksys_tag.elf"  ./src/gcc_startup_nrf51.o ./src/main.o ./src/radio.o ./src/system_nrf51.o  ./nrf_delay/nrf_delay.o  ./core/adc.o ./core/crc16.o ./core/crc32.o ./core/crc8.o ./core/timer.o ./core/uart.o ./core/xxtea.o   
-Finished building target: loksys_tag.elf
- 
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O ihex "loksys_tag.elf"  "loksys_tag.hex"
-Finished building: loksys_tag.hex
- 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39052	   3284	    188	  42524	   a61c	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-21:42:18 **** Incremental Build of configuration Debug for project loksys_tag ****
+22:47:42 **** Incremental Build of configuration Debug for project loksys_receiver ****
 make all 
 Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
+arm-none-eabi-size --format=berkeley "loksys_receiver.elf"
    text	   data	    bss	    dec	    hex	filename
-  39052	   3284	    188	  42524	   a61c	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-21:42:39 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39052	   3284	    188	  42524	   a61c	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-21:43:12 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39052	   3284	    188	  42524	   a61c	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-21:45:35 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Building file: ../src/main.c
-Invoking: Cross ARM C Compiler
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -DNRF51 -DBOARD_PCA10000 -DNRF51822_QFAA_CA -DDEBUG -I/opt/nrf51_sdk/nrf51822/Include -I/opt/nrf51_sdk/nrf51822/Include/gcc -I/home/valdo/Documents/nrf51/loksys_core -std=gnu99 -MMD -MP -MF"src/main.d" -MT"src/main.o" -c -o "src/main.o" "../src/main.c"
-Finished building: ../src/main.c
- 
-Building target: loksys_tag.elf
-Invoking: Cross ARM C Linker
-arm-none-eabi-gcc -mcpu=cortex-m0 -mthumb -mfloat-abi=soft -mabi=aapcs -O0 -fmessage-length=0 -Werror  -g3 -T mem.ld -T sections.ld -L"../ldscripts" -Wl,-Map,"loksys_tag.map" -o "loksys_tag.elf"  ./src/gcc_startup_nrf51.o ./src/main.o ./src/radio.o ./src/system_nrf51.o  ./nrf_delay/nrf_delay.o  ./core/adc.o ./core/crc16.o ./core/crc32.o ./core/crc8.o ./core/timer.o ./core/uart.o ./core/xxtea.o   
-Finished building target: loksys_tag.elf
- 
-Invoking: Cross ARM GNU Create Flash Image
-arm-none-eabi-objcopy -O ihex "loksys_tag.elf"  "loksys_tag.hex"
-Finished building: loksys_tag.hex
- 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39108	   3284	    188	  42580	   a654	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-22:17:06 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39108	   3284	    188	  42580	   a654	loksys_tag.elf
-Finished building: loksys_tag.siz
- 
-22:17:38 **** Incremental Build of configuration Debug for project loksys_tag ****
-make all 
-Invoking: Cross ARM GNU Print Size
-arm-none-eabi-size --format=berkeley "loksys_tag.elf"
-   text	   data	    bss	    dec	    hex	filename
-  39108	   3284	    188	  42580	   a654	loksys_tag.elf
-Finished building: loksys_tag.siz
+  39020	   3284	    252	  42556	   a63c	loksys_receiver.elf
+Finished building: loksys_receiver.siz
  

@@ -10,9 +10,11 @@
 #include "adc.h"
 #include "timer.h"
 
-ProtoEnvelope env;
+ProtoEnvelope env_rx, env_tx;
 
 int main(void) {
+
+	uint8_t tagno = 0;
 
     /* Start 16 MHz crystal oscillator */
     NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
@@ -28,10 +30,9 @@ int main(void) {
     while (batt_mv == 0);
 
     // Read and set Tag ID
-	env.oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
-	env.proto = RFPROTO_TRACK;
-	env.batt = batt_mv;
-	env.data.tracker.seq = 1;
+	env_tx.oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
+	env_tx.proto = RFPROTO_PROXY;
+	env_tx.batt = batt_mv;
 
 	uart_init(TX_PIN_NUMBER, RX_PIN_NUMBER);
 	radio_init();
@@ -39,14 +40,13 @@ int main(void) {
 	// Start random number generator
 	NRF_RNG->TASKS_START = 1;
 
-	// Setup packet to radio
-	NRF_RADIO->PACKETPTR = (uint32_t) &env;
-
-	// Enable radio
-	NRF_RADIO->EVENTS_READY = 0U;
-	NRF_RADIO->TASKS_TXEN = 1;
-
 	while (true) {
+
+		NRF_RADIO->PACKETPTR = (uint32_t) &env_rx;
+
+		// Enable radio
+		NRF_RADIO->EVENTS_READY = 0U;
+		NRF_RADIO->TASKS_RXEN = 1U;
 
 		while (NRF_RADIO->EVENTS_READY == 0U);
 
@@ -54,10 +54,14 @@ int main(void) {
 		NRF_RADIO->EVENTS_END = 0U;
 		while (NRF_RADIO->EVENTS_END == 0U);
 
-		nrf_delay_ms(2UL * (uint8_t) NRF_RNG->VALUE);
-
-		env.data.tracker.seq += 1;
-		env.batt = batt_mv;
+		if (NRF_RADIO->CRCSTATUS == 1U) {
+			switch (env_rx.proto) {
+				case RFPROTO_TRACK:
+					break;
+				case RFPROTO_PROXY:
+					break;
+			}
+		}
 
 	}
 

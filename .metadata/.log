@@ -6347,3 +6347,6 @@ Cannot access memory at address 0x1e6
 java.lang.Exception: Cannot access memory at address 0x1e6
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.processMIOutput(AbstractMIControl.java:925)
 	at org.eclipse.cdt.dsf.mi.service.command.AbstractMIControl$RxThread.run(AbstractMIControl.java:754)
+
+!ENTRY org.eclipse.cdt.core 1 0 2014-08-24 22:24:18.345
+!MESSAGE Indexed 'loksys_receiver' (11 sources, 48 headers) in 0.996 sec: 2,037 declarations; 3,926 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
