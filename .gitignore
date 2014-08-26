@@ -1,14 +1,3 @@
-/uart_example/Debug/
-/uart_example/Release/
-/adc_example/Debug/
-/adc_example/Release/
-/radio_example/Debug/
-/radio_example/Release/
-/.metadata/**/*.log
-/.metadata/**/.history
-/loksys_tag/Debug/
-/loksys_tag/Release/
-/loksys_core/Debug/
-/loksys_core/Release/
-/radio_tx_example/Debug/
-/radio_tx_example/Release/
+/*/Debug/
+/*/Release/
+/.metadata
