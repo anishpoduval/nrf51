@@ -13,7 +13,7 @@
 #ifndef UART_H
 #define UART_H
 
-void uart_init(uint8_t txd_pin_number, uint8_t rxd_pin_number);
+void uart_init(void);
 uint8_t uart_get(void);
 
 #endif

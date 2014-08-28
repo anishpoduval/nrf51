@@ -1,4 +1,4 @@
-#include <stdint.h>
+#include "config.h"
 #include "xxtea.h"
 
 static const uint32_t DELTA = 0x9e3779b9UL;

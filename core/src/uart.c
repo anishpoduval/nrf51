@@ -9,13 +9,8 @@
  * the file.
  */
 
-#include "nrf.h"
+#include "config.h"
 #include "uart.h"
-#include "nrf_gpio.h"
-
-#include <stdio.h>
-#include <stdint.h>
-#include <ctype.h>
 
 #define BUFFER_LENGTH 16
 
@@ -26,14 +21,14 @@
 static volatile uint8_t rx_buffer[BUFFER_LENGTH];
 static volatile uint8_t rxwp, rxrp, nrx;
 
-void uart_init(uint8_t txd_pin_number, uint8_t rxd_pin_number) {
+void uart_init(void) {
 	rxwp = rxrp = nrx = 0;
 
-	nrf_gpio_cfg_output(txd_pin_number);
-	nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_NOPULL);
+	nrf_gpio_cfg_output(TX_PIN_NUMBER);
+	nrf_gpio_cfg_input(RX_PIN_NUMBER, NRF_GPIO_PIN_NOPULL);
 
-	NRF_UART0->PSELTXD = txd_pin_number;
-	NRF_UART0->PSELRXD = rxd_pin_number;
+	NRF_UART0->PSELTXD = TX_PIN_NUMBER;
+	NRF_UART0->PSELRXD = RX_PIN_NUMBER;
 
 	NRF_UART0->BAUDRATE = (UART_BAUDRATE_BAUDRATE_Baud38400 << UART_BAUDRATE_BAUDRATE_Pos);
 	NRF_UART0->ENABLE = (UART_ENABLE_ENABLE_Enabled << UART_ENABLE_ENABLE_Pos);

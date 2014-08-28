@@ -27,8 +27,6 @@ int main(void) {
     // Set payload pointer
     NRF_RADIO->PACKETPTR = (uint32_t) packet;
 
-    packet[0] = 1;
-
 	while (true) {
 
 		//nrf_gpio_pin_set(LED_RGB_BLUE);
@@ -52,8 +50,6 @@ int main(void) {
 
 		//nrf_gpio_pin_clear(LED_RGB_RED);
 		//nrf_delay_us(1000000);
-
-		packet[0] += 1;
 
 	}
 }
