@@ -11,6 +11,7 @@
 #define RFPROTO_TRACK 0x01
 #define RFPROTO_PROXY 0x02
 
+#define SIGNATURE_SIZE    5
 #define PROXY_TAGS_LENGTH 3
 
 typedef struct {
@@ -47,7 +48,11 @@ typedef struct {
 	uint32_t  oid;
 	uint8_t   batt;
 	ProtoData data;
+	uint8_t   signature[SIGNATURE_SIZE];
 
 } PACKED ProtoEnvelope;
+
+#define PRINT_ENVELOPE(e) printf("ProtoEnvelope: oid=%d, batt=%d, proto=%d, seq=%d\r\n", \
+												 e.oid,  e.batt,  e.proto, e.data.tracker.seq);
 
 #endif /* PROTO_H_ */
