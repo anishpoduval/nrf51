@@ -4,9 +4,7 @@
 #include "timer.h"
 #include "proto.h"
 #include "crc32.h"
-
-volatile ProtoEnvelope g_env ALIGN4;
-volatile uint8_t g_enc[sizeof(g_env)] ALIGN4;
+#include "radio.h"
 
 int main(void) {
 
@@ -14,26 +12,25 @@ int main(void) {
 	uart_init();
 	adc_init();
 
-	// Reset envelope
-	memset(&g_env, 0, sizeof(g_env));
-
+	// Start ADC
 	adc_start();
 
+	// Reset envelope
+	memset((uint8_t*) &g_env, 0, sizeof(g_env));
+
+	// Initialize values
 	g_env.oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
 	g_env.batt = adc_bat(true);
+	g_env.proto = RFPROTO_TRACK;
+	g_env.data.tracker.seq = 1;
 
-	printf("Starting Device ID[%d]\n", g_env.oid);
+	// Print something
+	printf("Starting Device ID[%d]\n", (uint32_t) g_env.oid);
 
-	while (true) {
+	// Start timer
+	NRF_RTC0->CC[0] = SECONDS(1UL);
+	NRF_RTC0->TASKS_START = 1;
 
-		g_env.batt = adc_bat(false);
-
-		//nrf_gpio_pin_clear(LED_RGB_RED);
-		//nrf_gpio_pin_set(LED_RGB_BLUE);
-		//nrf_delay_us(1000000);
-		//nrf_gpio_pin_clear(LED_RGB_BLUE);
-		//nrf_gpio_pin_set(LED_RGB_RED);
-
-	}
+	while (true);
 
 }

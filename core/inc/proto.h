@@ -8,8 +8,6 @@
 #ifndef PROTO_H_
 #define PROTO_H_
 
-#define PACKED  __attribute__((__packed__))
-
 #define RFPROTO_TRACK 0x01
 #define RFPROTO_PROXY 0x02
 

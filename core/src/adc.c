@@ -52,7 +52,7 @@ void adc_start(void) {
 	adc_wait = true;
 }
 
-uint8_t adc_bat_wait(bool wait) {
+uint8_t adc_bat(bool wait) {
 	if (wait) {
 		while (adc_wait)
 			__WFE();
