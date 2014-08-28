@@ -26,7 +26,7 @@
 #define __ADC_H__
 
 extern void adc_init(void);
-extern void adc_start(void);
+extern void adc_start(bool wait);
 extern uint8_t adc_bat(void);
 
 #endif/*__ADC_H__*/
