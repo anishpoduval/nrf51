@@ -5,6 +5,7 @@
 #include "radio.h"
 #include "aes.h"
 #include "rng.h"
+#include "temp.h"
 
 void RTC0_IRQHandler(void) {
 
@@ -31,7 +32,9 @@ void RTC0_IRQHandler(void) {
 		NRF_RTC0->EVENTS_COMPARE[1] = 0;
 
 		adc_start();
-		printf("Sample ADC\r\n");
+		temp_start();
+
+		printf("Sample ADC/Temp\r\n");
 
 		NRF_RTC0->CC[1] = NRF_RTC0->COUNTER + SECONDS(10UL);
 

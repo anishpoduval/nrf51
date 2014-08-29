@@ -47,12 +47,13 @@ typedef struct {
 	uint8_t   proto;
 	uint32_t  oid;
 	uint8_t   batt;
+	int8_t   temp;
 	ProtoData data;
 	uint8_t   signature[SIGNATURE_SIZE];
 
 } PACKED ProtoEnvelope;
 
-#define PRINT_ENVELOPE(e) printf("ProtoEnvelope: oid=%d, batt=%d, proto=%d, seq=%d\r\n", \
-												 e.oid,  e.batt,  e.proto, e.data.tracker.seq);
+#define PRINT_ENVELOPE(e) printf("ProtoEnvelope: oid=%u, batt=%u, temp=%d, proto=%u, seq=%u\r\n", \
+												 e.oid,  e.batt,  e.temp, e.proto, e.data.tracker.seq);
 
 #endif /* PROTO_H_ */
