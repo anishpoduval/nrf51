@@ -8,7 +8,7 @@
 #include "config.h"
 #include "temp.h"
 
-static volatile uint8_t g_temp;
+static volatile int8_t g_temp;
 bool temp_wait = false;
 
 void TEMP_IRQHandler(void) {
@@ -18,7 +18,7 @@ void TEMP_IRQHandler(void) {
 		NRF_TEMP->EVENTS_DATARDY = 0;
 
 		/* read temperature */
-		g_temp = NRF_TEMP->TEMP / 4;
+		g_temp = TEMP_CALC(NRF_TEMP->TEMP) / 4;
 
 		/* disable ADC after sampling voltage */
 		NRF_TEMP->TASKS_STOP = 1;
@@ -33,7 +33,7 @@ void temp_start(void) {
 	temp_wait = true;
 }
 
-uint8_t temp_get(bool wait) {
+int8_t temp_get(bool wait) {
 	if (wait) {
 		while (temp_wait)
 			__WFE();
@@ -44,6 +44,9 @@ uint8_t temp_get(bool wait) {
 void temp_init(void) {
 	/* initialize temperature */
 	g_temp = 0;
+
+	// Initializes the TEMP module and writes to the hidden configuration register
+	*(uint32_t *) 0x4000C504 = 0;
 
 	/* setup temperature metering interrupt */
 	NRF_TEMP->INTENSET = ((TEMP_INTENSET_DATARDY_Enabled << TEMP_INTENSET_DATARDY_Pos));

@@ -55,11 +55,11 @@ htonl (uint32_t x)
 
 #define BIT_REVERSE(x) ((unsigned char)(__RBIT(x)>>24))
 
-#include <crc8.h>
-#include <crc16.h>
-#include <crc32.h>
-#include <xxtea.h>
-#include <uart.h>
+#include "crc8.h"
+#include "crc16.h"
+#include "crc32.h"
+#include "xxtea.h"
+#include "uart.h"
 
 /* only two priority bits available ! */
 

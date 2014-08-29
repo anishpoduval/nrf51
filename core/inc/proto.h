@@ -31,8 +31,6 @@ typedef struct {
 
 typedef struct {
 
-	uint32_t seq;
-
 } PACKED ProtoTracker;
 
 typedef union {
@@ -47,13 +45,11 @@ typedef struct {
 	uint8_t   proto;
 	uint32_t  oid;
 	uint8_t   batt;
-	int8_t   temp;
+	int8_t    temp;
+	uint32_t  seq;
 	ProtoData data;
 	uint8_t   signature[SIGNATURE_SIZE];
 
 } PACKED ProtoEnvelope;
-
-#define PRINT_ENVELOPE(e) printf("ProtoEnvelope: oid=%u, batt=%u, temp=%d, proto=%u, seq=%u\r\n", \
-												 e.oid,  e.batt,  e.temp, e.proto, e.data.tracker.seq);
 
 #endif /* PROTO_H_ */
