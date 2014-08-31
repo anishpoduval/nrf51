@@ -22,13 +22,12 @@
 
 #if defined(BOARD_PCA10000)
   #include "pca10000.h"
-#elif defined(BEACON)
-  #include "beacon.h"
-#elif defined(BOARD_PCA10004_5)
-  #include "boards/pca10004_5.h"
+#elif defined(BOARD_PCA20006)
+  #include "pca20006.h"
 #else
 #error "Board is not defined"
 #endif
+
 
 #define PACKED __attribute__((packed))
 #define WEAK __attribute__ ((weak))
@@ -60,6 +59,7 @@ htonl (uint32_t x)
 #include "crc32.h"
 #include "xxtea.h"
 #include "uart.h"
+#include "error.h"
 
 /* only two priority bits available ! */
 

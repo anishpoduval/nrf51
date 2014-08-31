@@ -16,31 +16,24 @@ void blink(uint8_t pin, uint8_t times) {
 	}
 }
 
-void blink_loop(void) {
+void blink_loop(uint8_t pin) {
 	while (true) {
-		nrf_gpio_pin_clear(LED_RGB_GREEN);
+		nrf_gpio_pin_clear(pin);
 		nrf_delay_ms(5);
-		nrf_gpio_pin_set(LED_RGB_GREEN);
+		nrf_gpio_pin_set(pin);
 		nrf_delay_ms(2000);
 	}
 }
 
+#ifdef BOARD_PCA10000
 void printf_env(ProtoEnvelope *e) {
-
-  printf("ProtoEnvelope: oid=%u, batt=%u, temp=%d, proto=%u, seq=%u\r\n",
+	printf("ProtoEnvelope: oid=%u, batt=%u, temp=%d, proto=%u, seq=%u\r\n",
 		                 e->oid,  e->batt,  e->temp, e->proto, e->seq);
-
 }
+#endif
 
 
 void init(uint8_t proto) {
-
-	timer_init();
-	uart_init();
-	adc_init();
-	radio_init();
-	rng_init();
-	temp_init();
 
 	nrf_gpio_cfg_output(LED_RGB_RED);
 	nrf_gpio_cfg_output(LED_RGB_GREEN);
@@ -49,6 +42,17 @@ void init(uint8_t proto) {
 	nrf_gpio_pin_set(LED_RGB_RED);
 	nrf_gpio_pin_set(LED_RGB_GREEN);
 	nrf_gpio_pin_set(LED_RGB_BLUE);
+
+	blink(LED_RGB_GREEN, 20);
+
+	timer_init();
+#ifdef BOARD_PCA10000
+	uart_init();
+#endif
+	adc_init();
+	radio_init();
+	rng_init();
+	temp_init();
 
 	// Start environment measurements
 	adc_start();
@@ -67,8 +71,10 @@ void init(uint8_t proto) {
 	// Init AES service
 	aes_init(g_env.oid);
 
+#ifdef BOARD_PCA10000
 	// Print something
 	printf("Starting Device ID[%u]\r\n", (uint32_t) g_env.oid);
+#endif
 
 	blink(LED_RGB_BLUE, 5);
 

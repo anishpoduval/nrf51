@@ -12,7 +12,9 @@ void RTC0_IRQHandler(void) {
 		g_env.temp = temp_get(false);
 		g_env.seq += 1;
 
+#ifdef BOARD_PCA10000
 		printf_env(&g_env);
+#endif
 
 		aes_encr(&g_env, &g_enc, sizeof(g_env), SIGNATURE_SIZE);
 		radio_start((uint32_t) &g_enc);
@@ -26,7 +28,9 @@ void RTC0_IRQHandler(void) {
 		adc_start();
 		temp_start();
 
+#ifdef BOARD_PCA10000
 		printf("Sample ADC/Temp\r\n");
+#endif
 
 		NRF_RTC0->CC[1] = NRF_RTC0->COUNTER + SECONDS(10UL);
 
@@ -43,6 +47,8 @@ void RADIO_IRQHandler(void) {
 
 		// Setup loop after
 		NRF_RTC0->CC[0] = NRF_RTC0->COUNTER + MILLISECONDS(50 + (rng(16) % 42));
+
+		blink(LED_RGB_RED, 5);
 
 	}
 

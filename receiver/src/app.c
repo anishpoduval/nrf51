@@ -87,6 +87,8 @@ void RADIO_IRQHandler(void) {
 
 				}
 
+			} else {
+				printf("Bad CRC!\r\n");
 			}
 
 		}
@@ -111,6 +113,15 @@ void RADIO_IRQHandler(void) {
 
 		/* acknowledge event */
 		NRF_RADIO->EVENTS_DISABLED = 0;
+
+	}
+
+	if (NRF_RADIO->EVENTS_ADDRESS) {
+
+		/* acknowledge event */
+		NRF_RADIO->EVENTS_ADDRESS = 0;
+
+		printf("Address Event!\r\n");
 
 	}
 

@@ -4,6 +4,16 @@
 
 int main(void) {
 
+	nrf_gpio_cfg_output(LED_RGB_RED);
+	nrf_gpio_cfg_output(LED_RGB_GREEN);
+	nrf_gpio_cfg_output(LED_RGB_BLUE);
+
+	nrf_gpio_pin_set(LED_RGB_RED);
+	nrf_gpio_pin_set(LED_RGB_GREEN);
+	nrf_gpio_pin_set(LED_RGB_BLUE);
+
+	blink_loop(LED_RGB_GREEN);
+
 	init(RFPROTO_TRACK);
 
 	// Start timer
@@ -14,6 +24,6 @@ int main(void) {
 
 	radio_init_tx();
 
-	blink_loop();
+	blink_loop(LED_RGB_RED);
 
 }

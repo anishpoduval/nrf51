@@ -53,9 +53,9 @@
 								</option>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs.812746509" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.assembler.defs" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="NRF51"/>
-									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.1461509847" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -68,9 +68,9 @@
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.1654975597" name="Language standard" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std" useByScannerDiscovery="true" value="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.std.gnu99" valueType="enumerated"/>
 								<option id="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs.1952241043" name="Defined symbols (-D)" superClass="ilg.gnuarmeclipse.managedbuild.cross.option.c.compiler.defs" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="NRF51"/>
-									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1124085055" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>
@@ -197,6 +197,8 @@
 									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="NDEBUG"/>
+									<listOptionValue builtIn="false" value="BEACON"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.1278218996" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -211,6 +213,8 @@
 									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="NDEBUG"/>
+									<listOptionValue builtIn="false" value="BEACON"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.622461038" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>

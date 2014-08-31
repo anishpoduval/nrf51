@@ -20,10 +20,14 @@
 ProtoEnvelope g_env ALIGN4;
 uint8_t g_enc[sizeof(g_env)] ALIGN4;
 
-void blink_loop(void);
+void blink_loop(uint8_t pin);
 void blink(uint8_t pin, uint8_t times);
 void init(uint8_t proto);
 
+#ifdef BOARD_PCA10000
+
 void printf_env(ProtoEnvelope *e);
+
+#endif
 
 #endif /* MAIN_H_ */

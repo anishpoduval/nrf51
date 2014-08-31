@@ -12,6 +12,8 @@
 #include "config.h"
 #include "uart.h"
 
+#ifdef BOARD_PCA10000
+
 #define BUFFER_LENGTH 16
 
 /**
@@ -81,3 +83,4 @@ int _write(int fd, char * str, int len) {
 	return len;
 }
 
+#endif

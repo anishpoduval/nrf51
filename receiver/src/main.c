@@ -12,6 +12,6 @@ int main(void) {
 
 	NRF_RTC0->TASKS_START = 1;
 
-	blink_loop();
+	blink_loop(LED_RGB_GREEN);
 
 }
