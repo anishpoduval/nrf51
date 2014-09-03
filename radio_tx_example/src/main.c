@@ -5,8 +5,12 @@
 #include "boards.h"
 #include "radio.h"
 #include "uart.h"
+#include "radio.h"
+#include "aes.h"
+#include "crc32.h"
 
-static uint8_t packet[4];
+static Packet p;
+static uint8_t enc[sizeof(p)];
 
 int main(void) {
 
@@ -17,22 +21,35 @@ int main(void) {
     /* Wait for the external oscillator to start up */
     while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
+	NRF_RNG->CONFIG = 0;
+	NRF_RNG->TASKS_START = 1;
+	while (NRF_RNG->EVENTS_VALRDY == 0);
+
     nrf_gpio_cfg_output(LED_RGB_RED);
-    nrf_gpio_cfg_output(LED_RGB_BLUE);
+    nrf_gpio_pin_set(LED_RGB_RED);
 
     uart_init(TX_PIN_NUMBER, RX_PIN_NUMBER);
 	radio_init();
 
-    // Set payload pointer
-    NRF_RADIO->PACKETPTR = (uint32_t) packet;
+	uint32_t oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
+	aes_init(oid);
 
-    packet[0] = 1;
+    // Set payload pointer
+    NRF_RADIO->PACKETPTR = (uint32_t) &enc;
+
+    p.seq = 1;
+    p.oid = NRF_RNG->VALUE;
+    NRF_RNG->TASKS_START = 1;
 
 	while (true) {
 
 		//nrf_gpio_pin_set(LED_RGB_BLUE);
 
-		radio_send();
+		if (aes_encr(&p, &enc, sizeof(enc), SIGNATURE_SIZE) == 0) {
+
+			radio_send();
+
+		}
 
 		//uart_putstring((const uint8_t *) "Sent ");
 		//uart_put(packet[0]);
@@ -53,7 +70,14 @@ int main(void) {
 		//nrf_gpio_pin_clear(LED_RGB_RED);
 		nrf_delay_us(100000);
 
-		packet[0] += 1;
+		p.seq += 1;
+		p.oid = NRF_RNG->VALUE;
+
+		NRF_RNG->TASKS_START = 1;
+
+		nrf_gpio_pin_clear(LED_RGB_RED);
+		nrf_delay_ms(5);
+		nrf_gpio_pin_set(LED_RGB_RED);
 
 	}
 }

@@ -1,10 +1,3 @@
-/*
- * main.c
- *
- *  Created on: Aug 29, 2014
- *      Author: valdo
- */
-
 #include "main.h"
 
 void blink(uint8_t pin, uint8_t times) {
@@ -25,30 +18,47 @@ void blink_loop(uint8_t pin) {
 	}
 }
 
-#ifdef BOARD_PCA10000
-void printf_env(ProtoEnvelope *e) {
-	printf("ProtoEnvelope: oid=%u, batt=%u, temp=%d, proto=%u, seq=%u\r\n",
-		                 e->oid,  e->batt,  e->temp, e->proto, e->seq);
+void printf_env(const ProtoEnvelope *e) {
+	switch (e->proto) {
+
+		case RFPROTO_TRACK:
+
+			printf("RFPROTO_TRACK: oid=%u, batt=%u, temp=%d, seq=%u\r\n", e->oid, e->batt, e->temp, e->seq);
+			break;
+
+		case RFPROTO_PROXY:
+
+			printf("RFPROTO_PROXY: oid=%u, batt=%u, temp=%d, seq=%u ", e->oid, e->batt, e->temp, e->seq);
+			for (uint8_t i = 0; i < PROXY_TAGS_LENGTH; i++) {
+				const ProtoProxyTag *t = &(e->data.proxy.tags[i]);
+				printf("(oid=%u,batt=%u,temp=%d,seq=%u,rssi=%d)", t->oid, t->batt, t->temp, t->seq, t->rssi);
+			}
+			printf("\r\n");
+			break;
+
+		default:
+
+			printf("RFPR_ENVELOPE: proto=%u, oid=%u, batt=%u, temp=%d, seq=%u\r\n", e->proto, e->oid, e->batt, e->temp, e->seq);
+			break;
+
+	}
 }
-#endif
 
 
-void init(uint8_t proto) {
+uint32_t init(void) {
 
-	nrf_gpio_cfg_output(LED_RGB_RED);
+	uint32_t oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
+
+	//nrf_gpio_cfg_output(LED_RGB_RED);
 	nrf_gpio_cfg_output(LED_RGB_GREEN);
-	nrf_gpio_cfg_output(LED_RGB_BLUE);
+	//nrf_gpio_cfg_output(LED_RGB_BLUE);
 
-	nrf_gpio_pin_set(LED_RGB_RED);
+	//nrf_gpio_pin_set(LED_RGB_RED);
 	nrf_gpio_pin_set(LED_RGB_GREEN);
-	nrf_gpio_pin_set(LED_RGB_BLUE);
-
-	blink(LED_RGB_GREEN, 20);
+	//nrf_gpio_pin_set(LED_RGB_BLUE);
 
 	timer_init();
-#ifdef BOARD_PCA10000
 	uart_init();
-#endif
 	adc_init();
 	radio_init();
 	rng_init();
@@ -58,25 +68,15 @@ void init(uint8_t proto) {
 	adc_start();
 	temp_start();
 
-	// Reset envelope
-	memset((uint8_t*) &g_env, 0, sizeof(g_env));
-
-	// Initialize values
-	g_env.oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
-	g_env.batt = adc_bat(true);
-	g_env.temp = temp_get(true);
-	g_env.proto = proto;
-	g_env.seq = 0;
-
 	// Init AES service
-	aes_init(g_env.oid);
+	aes_init(oid);
 
-#ifdef BOARD_PCA10000
 	// Print something
-	printf("Starting Device ID[%u]\r\n", (uint32_t) g_env.oid);
-#endif
+	printf("Starting Device ID[%u]\r\n", oid);
 
-	blink(LED_RGB_BLUE, 5);
+	blink(LED_RGB_GREEN, 5);
+
+	return oid;
 
 }
 

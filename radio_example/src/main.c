@@ -6,8 +6,11 @@
 #include "boards.h"
 #include "radio.h"
 #include "uart.h"
+#include "aes.h"
+#include "crc32.h"
 
-static uint8_t packet[4];
+static Packet p;
+static uint8_t enc[sizeof(p)];
 
 int main(void) {
 
@@ -18,14 +21,17 @@ int main(void) {
     /* Wait for the external oscillator to start up */
     while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
 
-    nrf_gpio_cfg_output(LED_RGB_RED);
-    nrf_gpio_cfg_output(LED_RGB_BLUE);
+    nrf_gpio_cfg_output(LED_RGB_GREEN);
+    nrf_gpio_pin_set(LED_RGB_GREEN);
 
     uart_init(TX_PIN_NUMBER, RX_PIN_NUMBER);
 	radio_init();
 
+	uint32_t oid = crc32(&NRF_FICR->DEVICEID, sizeof(NRF_FICR->DEVICEID));
+	aes_init(oid);
+
     // Set payload pointer
-    NRF_RADIO->PACKETPTR = (uint32_t) packet;
+    NRF_RADIO->PACKETPTR = (uint32_t) &enc;
 
 	while (true) {
 
@@ -43,13 +49,19 @@ int main(void) {
 		//nrf_gpio_pin_set(LED_RGB_RED);
 
 		if (radio_receive()) {
-			printf("Received: no = %d, rssi = %d\n\r", packet[0], NRF_RADIO->RSSISAMPLE);
+			if (aes_decr(&enc, &p, sizeof(p), SIGNATURE_SIZE) == 0) {
+				printf("Received: seq = %u, rand = %u, batt = %u, rssi = %u\n\r", p.seq, p.oid, p.batt, NRF_RADIO->RSSISAMPLE);
+			}
 		} else {
 			printf("Bad CRC");
 		}
 
 		//nrf_gpio_pin_clear(LED_RGB_RED);
 		//nrf_delay_us(1000000);
+
+		nrf_gpio_pin_clear(LED_RGB_GREEN);
+		nrf_delay_ms(5);
+		nrf_gpio_pin_set(LED_RGB_GREEN);
 
 	}
 }

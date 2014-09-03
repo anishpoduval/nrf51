@@ -4,6 +4,11 @@
 
 void timer_init(void) {
 
+    /* Start 16 MHz crystal oscillator */
+    NRF_CLOCK->EVENTS_HFCLKSTARTED = 0;
+    NRF_CLOCK->TASKS_HFCLKSTART    = 1;
+    while (NRF_CLOCK->EVENTS_HFCLKSTARTED == 0);
+
 	/* start 32kHz crystal oscillator */
 	NRF_CLOCK->LFCLKSRC = (CLOCK_LFCLKSRCCOPY_SRC_Xtal << CLOCK_LFCLKSRCCOPY_SRC_Pos);
 	NRF_CLOCK->EVENTS_LFCLKSTARTED = 0;

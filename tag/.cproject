@@ -56,6 +56,7 @@
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
 									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input.1461509847" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.assembler.input"/>
 							</tool>
@@ -71,6 +72,7 @@
 									<listOptionValue builtIn="false" value="NRF51822_QFAA_CA"/>
 									<listOptionValue builtIn="false" value="DEBUG"/>
 									<listOptionValue builtIn="false" value="BOARD_PCA20006"/>
+									<listOptionValue builtIn="false" value="BOARD_PCA10000"/>
 								</option>
 								<inputType id="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input.1124085055" superClass="ilg.gnuarmeclipse.managedbuild.cross.tool.c.compiler.input"/>
 							</tool>

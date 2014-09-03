@@ -15,7 +15,20 @@ r
 loadbin loadbin.bin 0x0
 r
 g
-" >loadbin.jli
+" >loadbin.jl1
 
-JLinkExe -if SWD -device nRF51822 -speed 1000 loadbin.jli
-rm loadbin.jli loadbin.bin
+echo "
+si 1
+device nRF51822_xxAA
+rx 100
+halt
+w4 4001e504 1
+erase
+sleep 1000
+loadbin load.bin 0
+rx 100
+g
+" >loadbin.jl2
+
+JLinkExe -if SWD -device nRF51822_xxAA -speed 1000 loadbin.jl1
+rm loadbin.jl1 loadbin.jl2 loadbin.bin

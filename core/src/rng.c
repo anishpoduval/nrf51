@@ -98,15 +98,12 @@ uint32_t rng(uint8_t bits)
 	return data & ((1UL<<bits)-1);
 }
 
-void rng_init(void)
-{
+void rng_init(void) {
 	g_rng_pool_write = g_rng_pool_read = g_rng_pool_count = 0;
 
 	NRF_RNG->CONFIG = 0;
 	NRF_RNG->TASKS_START = 1;
-	NRF_RNG->INTENSET = (
-		(RNG_INTENSET_VALRDY_Enabled << RNG_INTENSET_VALRDY_Pos)
-	);
+	NRF_RNG->INTENSET = (RNG_INTENSET_VALRDY_Enabled << RNG_INTENSET_VALRDY_Pos);
 	NVIC_SetPriority(RNG_IRQn, IRQ_PRIORITY_RNG);
 	NVIC_EnableIRQ(RNG_IRQn);
 }

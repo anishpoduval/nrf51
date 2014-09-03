@@ -8,6 +8,7 @@
 #ifndef RADIO_H_
 #define RADIO_H_
 
+/*
 #define RADIO_CHANNEL 7UL
 #define RADIO_TXPOWER (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos)
 
@@ -30,15 +31,7 @@
 		((NRF_MAC_SIZE-1UL)           << RADIO_PCNF1_BALEN_Pos)   |\
 		(NRF_PAYLOAD_SIZE             << RADIO_PCNF1_STATLEN_Pos) |\
 		(NRF_PAYLOAD_SIZE             << RADIO_PCNF1_MAXLEN_Pos)
-
-ProtoEnvelope g_env ALIGN4;
-uint8_t g_enc[sizeof(g_env)] ALIGN4;
-
-void radio_start(uint32_t pointer);
-void radio_stop(void);
-
-void radio_init_rx(void);
-void radio_init_tx(void);
+*/
 
 void radio_init(void);
 

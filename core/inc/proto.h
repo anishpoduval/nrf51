@@ -18,7 +18,8 @@ typedef struct {
 
 	uint32_t oid;
 	uint8_t  batt;
-	uint8_t  rssi;
+	int8_t   temp;
+	int8_t   rssi;
 	uint32_t seq;
 
 } PACKED ProtoProxyTag;

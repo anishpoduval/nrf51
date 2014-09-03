@@ -5,6 +5,7 @@
  *      Author: valdo
  */
 
+#include <stdint.h>
 #include <stdbool.h>
 #include "radio.h"
 #include "nrf_delay.h"
@@ -13,14 +14,13 @@
 #define PACKET0_S0_SIZE             (0UL)  //!< S0 size in bits
 #define PACKET0_PAYLOAD_SIZE        (0UL)  //!< payload size in bits
 #define PACKET1_BASE_ADDRESS_LENGTH (4UL)  //!< base address length in bytes
-#define PACKET1_STATIC_LENGTH       (1UL)  //!< static length in bytes
-#define PACKET1_PAYLOAD_SIZE        (1UL)  //!< payload size in bytes
+#define PACKET1_STATIC_LENGTH       (sizeof(Packet))  //!< static length in bytes
+#define PACKET1_PAYLOAD_SIZE        (sizeof(Packet))  //!< payload size in bytes
 
 void radio_init(void) {
 
 	// Radio config
-	NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm
-			<< RADIO_TXPOWER_TXPOWER_Pos);
+	NRF_RADIO->TXPOWER = (RADIO_TXPOWER_TXPOWER_0dBm << RADIO_TXPOWER_TXPOWER_Pos);
 	NRF_RADIO->FREQUENCY = 7UL;  // Frequency bin 7, 2407MHz
 	NRF_RADIO->MODE = (RADIO_MODE_MODE_Nrf_2Mbit << RADIO_MODE_MODE_Pos);
 

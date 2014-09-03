@@ -28,7 +28,6 @@
 #error "Board is not defined"
 #endif
 
-
 #define PACKED __attribute__((packed))
 #define WEAK __attribute__ ((weak))
 #define ALIAS(f) __attribute__ ((weak, alias (#f)))

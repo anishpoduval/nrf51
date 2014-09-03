@@ -9,7 +9,7 @@
 #include "temp.h"
 
 static volatile int8_t g_temp;
-bool temp_wait = false;
+static volatile bool temp_wait = false;
 
 void TEMP_IRQHandler(void) {
 	if (NRF_TEMP->EVENTS_DATARDY) {

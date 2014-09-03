@@ -26,7 +26,7 @@
 #include <adc.h>
 
 static volatile uint8_t g_battery_voltage;
-bool adc_wait = false;
+static volatile bool adc_wait = false;
 
 void ADC_IRQHandler(void) {
 	if (NRF_ADC->EVENTS_END) {
@@ -46,16 +46,17 @@ void ADC_IRQHandler(void) {
 }
 
 void adc_start(void) {
+
 	/* start ADC voltage conversion */
 	NRF_ADC->ENABLE = 1;
 	NRF_ADC->TASKS_START = 1;
 	adc_wait = true;
+
 }
 
 uint8_t adc_bat(bool wait) {
 	if (wait) {
-		while (adc_wait)
-			__WFE();
+		while (adc_wait) __WFE();
 	}
 	return g_battery_voltage;
 }
