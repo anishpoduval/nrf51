@@ -16,9 +16,12 @@ typedef struct TagSlot {
 TagSlot_t  g_store[TAGS_LIST_LENGTH];
 TagSlot_t *g_head;
 
-void store_init(void) {
+uint32_t rec;
+
+void store_init(uint32_t oid) {
 	memset((uint8_t*) &g_store, 0, sizeof(g_store));
 	g_head = 0;
+	rec = oid;
 }
 
 void store_get(ProtoEnvelope *env) {
@@ -69,6 +72,7 @@ void store_save(const ProtoEnvelope *env, const int8_t rssi) {
 	}
 
 	// Update slot
+	slot->tag.rec  = rec;
 	slot->tag.oid  = env->oid;
 	slot->tag.batt = env->batt;
 	slot->tag.rssi = rssi;

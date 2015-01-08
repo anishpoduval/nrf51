@@ -160,7 +160,7 @@ int main(void) {
 	// Main init
     uint32_t oid = init();
 
-    store_init();
+    store_init(oid);
 
 	// Initialize values
     g_env.proto = RFPROTO_PROXY;

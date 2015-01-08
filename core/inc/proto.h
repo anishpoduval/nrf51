@@ -17,6 +17,7 @@
 typedef struct {
 
 	uint32_t oid;
+	uint32_t rec;
 	uint8_t  batt;
 	int8_t   temp;
 	int8_t   rssi;
@@ -48,7 +49,9 @@ typedef struct {
 	uint8_t   batt;
 	int8_t    temp;
 	uint32_t  seq;
+
 	ProtoData data;
+
 	uint8_t   signature[SIGNATURE_SIZE];
 
 } PACKED ProtoEnvelope;

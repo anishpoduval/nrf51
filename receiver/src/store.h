@@ -10,6 +10,6 @@
 
 void store_save(const ProtoEnvelope *env, const int8_t rssi);
 void store_get(ProtoEnvelope *env);
-void store_init(void);
+void store_init(uint32_t oid);
 
 #endif /* STORE_H_ */

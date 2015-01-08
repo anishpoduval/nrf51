@@ -8,8 +8,8 @@
 int main(void)
 {
   // flash red LED and blue LED alternately
-  nrf_gpio_cfg_output(LED_BLUE);
-  nrf_gpio_cfg_output(LED_RED);
+  nrf_gpio_cfg_output(17);
+  //nrf_gpio_cfg_output(LED_RED);
   
   //simple_uart_config(RTS_PIN_NUMBER, TX_PIN_NUMBER, CTS_PIN_NUMBER, RX_PIN_NUMBER, true);
 
@@ -18,11 +18,11 @@ int main(void)
 
 	//simple_uart_put(8);
 
-    nrf_gpio_pin_clear(LED_RED);
-    nrf_gpio_pin_set(LED_BLUE);
+    nrf_gpio_pin_clear(17);
+    //nrf_gpio_pin_set(LED_BLUE);
     nrf_delay_us(1000000);
-    nrf_gpio_pin_clear(LED_BLUE);
-    nrf_gpio_pin_set(LED_RED);
+    //nrf_gpio_pin_clear(LED_BLUE);
+    nrf_gpio_pin_set(17);
     nrf_delay_us(1000000);
   }
 }
